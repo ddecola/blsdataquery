@@ -8,8 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,8 @@ public class DataAccessController {
 
         final HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_UTF8_VALUE);
-        headers.add(HttpHeaders.LOCATION, "/blsdata/"+year.getYear());
-        headers.add(HttpHeaders.DATE, ZonedDateTime.now().toString());
+        headers.add(HttpHeaders.LOCATION, "/blsdata/" + year.getYear());
+        headers.add(HttpHeaders.DATE, DateTimeFormatter.RFC_1123_DATE_TIME.format(ZonedDateTime.now(ZoneOffset.UTC)));
 
         return new ResponseEntity<List<Map<String,Object>>>(dataService.filterBlsDataByYear(year.getYear()), headers, statusCode);
     }
