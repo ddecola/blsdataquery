@@ -1,0 +1,15 @@
+This is a small REST api meant to showcase some uses of Spring Boot and Google Cloud Engine BigQuery
+
+a credentials env var would need to be set when you run this to actually query GCE
+
+usage:
+
+curl -XPOST 'localhost:8080/blsdata -d {"year":"1999"}'
+
+returns JSON results from the GCE table: bigquery-public-data.bls.unemployment_cps, filtered by year
+
+these results are also written out to a local .json file in the working directory inside 'blsDataStore'
+
+said results can then be requested again via:
+
+curl -XGET 'locahost:8080/blsdata/1999'
