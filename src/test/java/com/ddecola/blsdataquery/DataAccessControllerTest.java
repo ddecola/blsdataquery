@@ -83,7 +83,6 @@ public class DataAccessControllerTest {
                 .andExpect(content().string(preparedJson()));
     }
 
-
     private List<Map<String, Object>> preparedData() {
         final Map<String, Object> map = new HashMap<String, Object>();
         map.put("key", "yup a value");
