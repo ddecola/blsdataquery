@@ -55,14 +55,16 @@ public class BigQueryDataAccessor {
     private List<Map<String,Object>> prepareResultData(final TableResult result) {
         final List<String> fields = new LinkedList<String>();
 
+        // collect the field names from the schema
         if (result.getSchema() != null && result.getSchema().getFields() != null)
             for (final Field f : result.getSchema().getFields())
                 fields.add(f.getName());
 
         final List<Map<String,Object>> data = new LinkedList<Map<String,Object>>();
 
-        for (FieldValueList row : result.iterateAll()) {
+        for (final FieldValueList row : result.iterateAll()) {
             final Map<String,Object> map = new HashMap<String,Object>();
+            // get the values for each row
             for (final String f : fields) {
                 map.put(f, row.get(f).getValue());
             }
