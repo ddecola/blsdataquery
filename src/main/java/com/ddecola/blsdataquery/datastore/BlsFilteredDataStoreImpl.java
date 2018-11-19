@@ -18,7 +18,7 @@ public class BlsFilteredDataStoreImpl implements BlsFilteredDataStore {
     private static final Map<String, List<Map<String,Object>>> YEAR_DATA_MAP = new HashMap<String, List<Map<String,Object>>>();
 
     // The base directory created in the current working directory of the running application
-    private final String BASE_DIR = "blsDataStore";
+    private String baseDir = "blsDataStore";
 
     // Initial setup is for an 'in-memory' store, only try to write to the 'on disk' data store if we can mkdir & write
     protected boolean useOnDiskDataStore = false;
@@ -76,7 +76,11 @@ public class BlsFilteredDataStoreImpl implements BlsFilteredDataStore {
     }
 
     protected String getBaseDirName() {
-        return BASE_DIR;
+        return baseDir;
+    }
+
+    protected void setBaseDirName(final String baseDir) {
+        this.baseDir = baseDir;
     }
 
     protected void storeDataAsJsonFile(final String year, final List<Map<String,Object>> data) throws IOException {
